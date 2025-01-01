@@ -9,7 +9,7 @@ $primary: #568cff;
 $secondary: #FDD503;
 $tertiary: #3757e9;
 $font: #0e0e30;
-$fontBox: #161633;
+$fontBox: #161633a9;
 $text: #ffffff;
 
 $radius: 20px;
@@ -132,7 +132,9 @@ h1 {
     border-radius: $radius;
 }
 
-
+.cardForm {
+    z-index:99;
+}
 //--------------------------
 
 @keyframes ticker {

@@ -136,7 +136,7 @@ function App() {
             <span>New Year New List</span>
             <h1>¿Cuáles son tus propósitos para este nuevo año?</h1>
           </div>
-          <div>
+          <div className="cardForm">
             {cardForm && (
               <Card.Root className="card">
                 <form onSubmit={handleSubmit}>
@@ -196,7 +196,7 @@ function App() {
 
           { /*--------------------------------------------*/ }
 
-          <div className="container">
+          <div className="stars-container">
             <div className="sky">
               <div className="stars"></div>
               <div className="stars1"></div>
