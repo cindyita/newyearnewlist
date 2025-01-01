@@ -216,6 +216,10 @@ h1 {
   .card {
     width: 100%;
   }
+  .absolute-top {
+    position: absolute;
+    top: 10px;
+  }
 }
 .flex-center-column {
   display: flex;
