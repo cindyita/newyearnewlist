@@ -1,0 +1,217 @@
+/*------------------------------------------*/
+/*----------SOLO EDITAR ARCHIVO SCSS--------*/
+/*----------NO EDITE EL CSS >:( ------------*/
+/*------------------------------------------*/
+
+/*------------------------*/
+/*-------VARIABLES--------*/
+$primary: #568cff;
+$secondary: #FDD503;
+$tertiary: #3757e9;
+$font: #0e0e30;
+$fontBox: #161633;
+$text: #ffffff;
+
+$radius: 20px;
+
+/*-------------------------*/
+/*-------FONT IMAGE--------*/
+html {
+    background: $font;
+}
+
+body {
+    background: $font;
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    color: $primary;
+}
+
+/*--------GENERAL----------*/
+/*-------------------------*/
+.logo {
+    width: 60px;
+}
+.logo-mobile {
+    width: 70px;
+}
+
+/*-------------------------*/
+/*---------SCROLLBAR-------*/
+*::-webkit-scrollbar {
+    width: 7px;
+}
+*::-webkit-scrollbar-track {
+    background: $tertiary;
+}
+*::-webkit-scrollbar-thumb {
+    background: $secondary;
+    border-radius: 5px;
+    border:1px solid $secondary;
+}
+* {
+    scrollbar-width: thin;
+}
+* {
+    scrollbar-color: $tertiary $secondary;
+}
+
+/*-------------------------*/
+/*-----------TEXT---------*/
+a {
+    color: $primary;
+}
+a:hover {
+    color: $tertiary;
+    cursor: pointer;
+}
+h1 {
+    font-weight: 600;
+    font-size: 15pt;
+}
+
+/*-------------------------*/
+/*-----------LAYOUT---------*/
+.main-content {
+    width: 100%;
+    height: 100%;
+}
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: 20px;
+    background: linear-gradient(to bottom, #020107 0%, $font 100%)
+}
+.card {
+    padding: 20px;
+    background-color: $fontBox;
+    border-radius: $radius;
+    width: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.titles {
+    padding: 0 20px;
+}
+.titles,.icon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.title-question {
+    text-align: center;
+}
+
+.input {
+    padding: 15px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: $radius;
+    margin-bottom: 10px;
+    color: white;
+    width: 100%;
+}
+.button {
+    padding: 5px 15px;
+    border-radius: $radius;
+    &:hover {
+        background-color: $primary;
+    }
+}
+.chakra-toast__root {
+    background-color: #568bff75;
+    padding: 10px 15px;
+    border-radius: $radius;
+}
+
+//--------------------------
+
+@keyframes ticker {
+    0% { 
+        transform: translate3d(100%, 0, 0); 
+    }
+    100% { 
+        transform: translate3d(-100%, 0, 0); 
+    }
+}
+
+@mixin flex($flex-display: flex, $direction: column,  $align: center, $justify: center){
+    display:                 -webkit-$flex-display; /* Safari */
+    display:                 $flex-display;
+    -webkit-flex-direction:  $direction; /* Safari */
+    flex-direction:          $direction;
+    -webkit-align-items:     $align;
+    align-items:             $align;
+    -webkit-justify-content: $justify;
+    justify-content:         $justify;
+}
+.absolute-top {
+    position:absolute;
+    top: 20px;
+    @include flex(flex, column, center, space-evenly);
+}
+.absolute-bottom {
+    position:absolute;
+    bottom: 20px;
+}
+.resolutions-content{
+    text-align: center;
+    z-index: 1;
+    background-color:transparent;
+    overflow: hidden;
+    .group{
+        width: 100vw;
+        min-height:200px;
+        @include flex(flex, column, center, space-evenly);
+        overflow: hidden;
+        .row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            gap: 70px;
+            @include flex(flex, row, flex-start, space-around);
+            transform: translate3d(25%, 0, 0); 
+            white-space: nowrap;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-name: ticker;
+            animation-duration: 40s;
+            &:before {
+                content: attr(data-content);
+                margin-left: 10px;
+            }
+            &:hover{animation-play-state: paused;}
+            span{    
+                color:white;
+                span {
+                    color: $primary;
+                }
+            }
+        }
+        .reverse {
+            animation-direction:reverse;
+        }
+    }
+}
+//--------------------------
+
+@media (max-width: 1023px){
+    .card {
+        width: 100%;
+    }
+}
+//----------------------------
+.flex-center-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
