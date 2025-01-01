@@ -126,10 +126,12 @@ h1 {
     }
 }
 .chakra-toast__root {
-    background-color: #568bff75;
+    // background-color: #568bff75;
+    opacity: 0.9;
     padding: 10px 15px;
     border-radius: $radius;
 }
+
 
 //--------------------------
 

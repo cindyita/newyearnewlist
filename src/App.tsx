@@ -13,7 +13,7 @@ import JSConfetti from 'js-confetti'
 import { DBService } from './services/DBService';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { CardComponent } from "./components/CardComponent";
-import ReCAPTCHA from 'react-google-recaptcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
 
 function App() {
   const [data, setData] = useState<any>([]);
@@ -25,10 +25,12 @@ function App() {
 
   const [formData, setFormData] = useState({
     nickname: "",
-    resolution: "",
+    resolution: ""
   });
 
-  const [captchaValid, setCaptchaValid] = useState(false);
+  const [captcha, setCaptcha] = useState<number>();
+
+  // const [captchaValid, setCaptchaValid] = useState(false);
 
   const jsConfetti = new JSConfetti()
 
@@ -62,17 +64,27 @@ function App() {
     }));
   };
 
-  const toast = (text:string,type:string = 'info') => {
+  const handleCaptcha= (e:any) => {
+    const { value } = e.target;
+    setCaptcha(value);
+  };
+
+  const toast = (text:string,type:string) => {
     toaster.create({
           title: text,
-          type: type,
+          type: type
         })
   }
 
   const handleSubmit = async (e:any) => {
     e.preventDefault();
     try {
-      if (captchaValid) {
+      // if (captchaValid) {
+      if (!formData.nickname || !formData.resolution) {
+        toast('Los campos están vacíos como tu alma', 'error');
+        return;
+      }
+      if(captcha == 7){
         await addDoc(collection(DBService, "newyearnewlist"), {
           ...formData,
           timestamp: new Date(),
@@ -94,13 +106,13 @@ function App() {
     }
   };
 
-  const handleCaptchaChange = (value: string | null) => {
-    if (value) {
-      setCaptchaValid(true);
-    } else {
-      setCaptchaValid(false);
-    }
-  };
+  // const handleCaptchaChange = (value: string | null) => {
+  //   if (value) {
+  //     setCaptchaValid(true);
+  //   } else {
+  //     setCaptchaValid(false);
+  //   }
+  // };
 
   return (
     <Provider>
@@ -150,7 +162,8 @@ function App() {
                   </Card.Body>
                   <Card.Footer justifyContent="center">
                     <div className="flex-center-column">
-                      <ReCAPTCHA sitekey={import.meta.env.VITE_RECAPTCHA_API_KEY} onChange={handleCaptchaChange} />
+                      {/* <ReCAPTCHA sitekey={import.meta.env.VITE_RECAPTCHA_API_KEY} onChange={handleCaptchaChange} /> */}
+                      <div><Input className="input" type="text" placeholder="Captcha: ¿Cuánto es 2+5?" name="captcha" value={captcha} onChange={handleCaptcha} /></div>
                       <Button className="button" type="submit">Me comprometo</Button>
                     </div>
                   </Card.Footer>
